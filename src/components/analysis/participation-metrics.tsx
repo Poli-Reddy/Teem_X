@@ -41,7 +41,10 @@ export default function ParticipationMetrics({ metrics }: ParticipationMetricsPr
           <TableBody>
             {metrics.map((metric) => (
               <TableRow key={metric.speaker}>
-                <TableCell className="font-medium">{metric.label}</TableCell>
+                <TableCell className="font-medium">
+                  <span className={`inline-block w-3 h-3 rounded-full mr-2 align-middle ${metric.characteristic.color}`}></span>
+                  {metric.label}
+                </TableCell>
                 <TableCell>{metric.speakingTime}</TableCell>
                 <TableCell>
                   <Badge variant="outline" className={`${sentimentColorMap[metric.sentiment]}`}>{metric.sentiment}</Badge>

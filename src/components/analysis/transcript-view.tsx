@@ -3,6 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import type { TranscriptEntry } from "@/lib/types";
+import { motion } from "framer-motion";
 
 interface TranscriptViewProps {
   transcript: TranscriptEntry[];
@@ -30,15 +31,23 @@ export default function TranscriptView({ transcript }: TranscriptViewProps) {
         <ScrollArea className="h-[400px] w-full pr-4">
           <div className="space-y-6">
             {transcript.map((entry) => (
-              <div key={entry.id} className="flex items-start gap-4">
-                <Avatar className="h-10 w-10 border">
-                    <AvatarFallback className={`${speakerColorMap[entry.speaker] || 'bg-muted'} font-bold`}>
-                        {entry.speaker}
-                    </AvatarFallback>
+              <motion.div
+                key={entry.id}
+                className="flex items-start gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: entry.id * 0.04 }}
+              >
+                <Avatar className={`h-10 w-10 border ${entry.characteristic.color}`}>
+                  <AvatarFallback className={`font-bold`}>
+                    {entry.speaker}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <p className="font-semibold text-foreground">{entry.label}</p>
+                    <div>
+                      <p className="font-semibold text-foreground inline-block mr-2">{entry.label}</p>
+                    </div>
                     <time className="text-xs text-muted-foreground">{entry.timestamp}</time>
                   </div>
                   <p className="text-muted-foreground mb-2">{entry.text}</p>
@@ -46,7 +55,7 @@ export default function TranscriptView({ transcript }: TranscriptViewProps) {
                     {entry.emotion}
                   </Badge>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </ScrollArea>

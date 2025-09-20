@@ -31,6 +31,10 @@ export default function EmotionTimeline({ data, speakers }: EmotionTimelineProps
         <CardDescription>Sentiment fluctuation per speaker over time.</CardDescription>
       </CardHeader>
       <CardContent>
+        <div className="flex items-center justify-between text-xs text-muted-foreground mb-1 px-1">
+          <span>Y: normalized sentiment (−1 to +1)</span>
+          <span>X: time</span>
+        </div>
         <ResponsiveContainer width="100%" height={250}>
           <LineChart
             data={data}
