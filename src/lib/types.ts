@@ -59,7 +59,6 @@ export interface SummaryData {
   overallSentiment: string;
   points: string[];
   relationshipSummary: string;
-  summaryReport?: string;
 }
 
 export interface AnalysisData {
